@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Raid.ogg-01b6fe7e4cf233d86e03729544613a17.oggstr"
+
+[deps]
+
+source_file="res://music/Raid.ogg"
+dest_files=[ "res://.import/Raid.ogg-01b6fe7e4cf233d86e03729544613a17.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
