@@ -8,6 +8,9 @@ extends KinematicBody2D
 onready var animation : AnimatedSprite = get_parent().get_node("Smoothing2D/AnimatedSprite")
 onready var jump_timer : Timer = get_node("JumpTimer")
 onready var low_jump_timer : Timer = get_node("LowJumpTimer")
+onready var footstepTimer : Timer = get_node("FootstepTimer")
+onready var footstepAudio : AudioStreamPlayer2D = get_node("Footstep")
+onready var fallOnGroundAudio : AudioStreamPlayer2D = get_node("FallOnGround")
 
 var SPEED : float = 500
 var FRICTION : float = 1
@@ -19,6 +22,7 @@ var MAX_VELOCITY : Vector2 = Vector2(1200, 4000)
 var HIGH_SPEED : float = 800
 var JUMPING : bool = false
 var AIR : bool = false
+var AIR_PROC : bool = false
 var DeadZone : float = 0.0
 
 var spawn_pos : Vector2 = Vector2(-13170, -2000)
@@ -38,9 +42,7 @@ func _physics_process(delta):
 	else:
 		if JUMPING:
 			JUMPING = false
-		if AIR:
-			AIR = false
-			Input.start_joy_vibration(0, 0.35, 0.35, 0.2)
+			
 		VELOCITY.y = 20
 		jump_timer.stop()
 	
@@ -48,7 +50,7 @@ func _physics_process(delta):
 		jump_timer.stop()
 		low_jump_timer.stop()
 		VELOCITY.y = 20
-	print(Input.get_action_strength("run_right"))
+	#print(Input.get_action_strength("run_right"))
 	if Input.is_action_pressed("run_left") and abs(Input.get_action_strength("run_left")) > DeadZone:
 		if VELOCITY.x > 0:
 			VELOCITY.x -= delta * SPEED * 4
@@ -121,11 +123,11 @@ func _physics_process(delta):
 	if VELOCITY.x < 0 and VELOCITY.x > -80 and !Input.is_action_pressed("run_left"):
 		VELOCITY.x = 0
 	
-	print_debug(VELOCITY)
+	#print_debug(VELOCITY)
 	
 	if VELOCITY.y == 20 and abs(VELOCITY.x) > MAX_VELOCITY.x/4:
 		var v_x = (abs(VELOCITY.x) - MAX_VELOCITY.x/4) / MAX_VELOCITY.x/3
-		print(v_x)
+		#print(v_x)
 		if v_x > 1:
 			v_x = 1
 		Input.start_joy_vibration(0, v_x, v_x, 0.1)
@@ -136,6 +138,16 @@ func _physics_process(delta):
 		move_and_slide_with_snap(VELOCITY, Vector2(0, 32), Vector2.UP, true, 10, deg2rad(50))
 
 func _process(delta):
+	if AIR and is_on_floor():
+		AIR = false
+		Input.start_joy_vibration(0, 0.35, 0.35, 0.2)
+		fallOnGroundAudio.volume_db = (-1/(VELOCITY.y+1 / MAX_VELOCITY.y))*10000 + 15
+		if fallOnGroundAudio.volume_db < -70:
+			fallOnGroundAudio.volume_db = -70
+		elif fallOnGroundAudio.volume_db > 30:
+			fallOnGroundAudio.volume_db = 30
+		print(VELOCITY.y, " ", fallOnGroundAudio.volume_db)
+		fallOnGroundAudio.play()		
 	if !is_on_floor() and VELOCITY.y < 0:
 		anim_speed = 1
 		if VELOCITY.x > 0:
@@ -186,6 +198,35 @@ func _process(delta):
 	animation.speed_scale = anim_speed
 	animation.flip_h = anim_flip
 	animation.play(anim_name)
+	
+	footstepAudio.volume_db = -0.6*20 + 5
+	match(anim_name):
+		"Run":
+			var timerW = 1/(anim_speed*4)
+			if timerW < 0.25:
+				timerW = 0.25
+			elif timerW > 0.6:
+				timerW = 0.6
+			#print(anim_speed, " ", timerW)
+			footstepTimer.wait_time = timerW
+			footstepAudio.pitch_scale = rand_range(0.9, 1.1)
+			footstepAudio.volume_db = -timerW*20 + 5
+			if footstepTimer.is_stopped():
+				footstepAudio.play()
+				footstepTimer.start()
+		"Fast Run":
+			var timerW = 1/(anim_speed*5)
+			if timerW < 0.1:
+				timerW = 0.1
+			elif timerW > 0.6:
+				timerW = 0.6
+			#print(anim_speed, " ", timerW)
+			footstepTimer.wait_time = timerW
+			footstepAudio.pitch_scale = rand_range(0.9, 1.1)
+			footstepAudio.volume_db = -timerW*20 + 8
+			if footstepTimer.is_stopped():
+				footstepAudio.play()
+				footstepTimer.start()
 	
 	if Input.is_action_just_pressed("Quit"):
 		get_tree().quit()
