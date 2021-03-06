@@ -18,6 +18,8 @@ var VELOCITY : Vector2 = Vector2.ZERO
 var MAX_VELOCITY : Vector2 = Vector2(1200, 4000)
 var HIGH_SPEED : float = 800
 var JUMPING : bool = false
+var AIR : bool = false
+var DeadZone : float = 0.0
 
 var spawn_pos : Vector2 = Vector2(-13170, -2000)
 
@@ -32,9 +34,13 @@ func _physics_process(delta):
 	
 	if !is_on_floor():
 		VELOCITY.y += GRAVITY * delta
+		AIR = true
 	else:
 		if JUMPING:
 			JUMPING = false
+		if AIR:
+			AIR = false
+			Input.start_joy_vibration(0, 0.35, 0.35, 0.2)
 		VELOCITY.y = 20
 		jump_timer.stop()
 	
@@ -42,13 +48,13 @@ func _physics_process(delta):
 		jump_timer.stop()
 		low_jump_timer.stop()
 		VELOCITY.y = 20
-	
-	if Input.is_action_pressed("run_left"):
+	print(Input.get_action_strength("run_right"))
+	if Input.is_action_pressed("run_left") and abs(Input.get_action_strength("run_left")) > DeadZone:
 		if VELOCITY.x > 0:
 			VELOCITY.x -= delta * SPEED * 4
 		else:
 			VELOCITY.x -= delta * SPEED
-	elif Input.is_action_pressed("run_right"):
+	elif Input.is_action_pressed("run_right") and abs(Input.get_action_strength("run_right")) > DeadZone:
 		if VELOCITY.x < 0:
 			VELOCITY.x += delta * SPEED * 4
 		else:
@@ -76,6 +82,7 @@ func _physics_process(delta):
 		jump_timer.start()
 		low_jump_timer.start()
 		JUMPING = true
+		Input.start_joy_vibration(0, 0.4, 0.4, 0.2)
 		#VELOCITY.y = JMP_SPEED
 #		if VELOCITY.x > 0:
 #			VELOCITY.x += 100
@@ -115,6 +122,13 @@ func _physics_process(delta):
 		VELOCITY.x = 0
 	
 	print_debug(VELOCITY)
+	
+	if VELOCITY.y == 20 and abs(VELOCITY.x) > MAX_VELOCITY.x/4:
+		var v_x = (abs(VELOCITY.x) - MAX_VELOCITY.x/4) / MAX_VELOCITY.x/3
+		print(v_x)
+		if v_x > 1:
+			v_x = 1
+		Input.start_joy_vibration(0, v_x, v_x, 0.1)
 	
 	if JUMPING or VELOCITY.x == 0:
 		move_and_slide(VELOCITY, Vector2.UP, true, 10, deg2rad(50))
