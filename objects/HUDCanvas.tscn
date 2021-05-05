@@ -1,0 +1,722 @@
+[gd_scene load_steps=34 format=2]
+
+[ext_resource path="res://sprites/HUD/Hp&Armor.png" type="Texture" id=1]
+[ext_resource path="res://sprites/HUD/AmmoHUD.png" type="Texture" id=2]
+[ext_resource path="res://sprites/HUD/LevelInfoHUD.png" type="Texture" id=3]
+[ext_resource path="res://sprites/HUD/TimerHUD.png" type="Texture" id=4]
+[ext_resource path="res://sprites/HUD/WeaponWhell.png" type="Texture" id=5]
+[ext_resource path="res://fonts/Font1.tres" type="DynamicFont" id=6]
+[ext_resource path="res://sprites/HUD/W1Light.png" type="Texture" id=7]
+[ext_resource path="res://UnshadedCanvasMaterial.tres" type="Material" id=8]
+[ext_resource path="res://sprites/HUD/Weapon6Pic.png" type="Texture" id=9]
+[ext_resource path="res://sprites/HUD/W6Light.png" type="Texture" id=10]
+[ext_resource path="res://sprites/HUD/W8Light.png" type="Texture" id=11]
+[ext_resource path="res://sprites/HUD/W7Light.png" type="Texture" id=12]
+[ext_resource path="res://sprites/HUD/W5Light.png" type="Texture" id=13]
+[ext_resource path="res://sprites/HUD/W3Light.png" type="Texture" id=14]
+[ext_resource path="res://sprites/HUD/W4Light.png" type="Texture" id=15]
+[ext_resource path="res://sprites/HUD/W2Light.png" type="Texture" id=16]
+[ext_resource path="res://sprites/HUD/Weapon1AmmoPic.png" type="Texture" id=17]
+[ext_resource path="res://sprites/HUD/Weapon5Pic.png" type="Texture" id=18]
+[ext_resource path="res://sprites/HUD/Weapon3Pic.png" type="Texture" id=19]
+[ext_resource path="res://sprites/HUD/Weapon7Pic.png" type="Texture" id=20]
+[ext_resource path="res://sprites/HUD/Weapon8Pic.png" type="Texture" id=21]
+[ext_resource path="res://sprites/HUD/Weapon4Pic.png" type="Texture" id=22]
+[ext_resource path="res://sprites/HUD/Weapon1Pic.png" type="Texture" id=23]
+[ext_resource path="res://sprites/HUD/Weapon9Pic.png" type="Texture" id=24]
+[ext_resource path="res://sprites/HUD/Weapon2Pic.png" type="Texture" id=25]
+[ext_resource path="res://sprites/HUD/AmmoLight.png" type="Texture" id=26]
+[ext_resource path="res://sprites/HUD/SecretsLight.png" type="Texture" id=27]
+[ext_resource path="res://sprites/HUD/HpLight.png" type="Texture" id=28]
+[ext_resource path="res://sprites/HUD/ArmorLight.png" type="Texture" id=29]
+[ext_resource path="res://sprites/HUD/AmmoPicLight.png" type="Texture" id=30]
+[ext_resource path="res://sprites/HUD/KillsLight.png" type="Texture" id=31]
+[ext_resource path="res://sprites/HUD/TimerLight.png" type="Texture" id=32]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.502359 ), 0.0, 0.0, 0, 0 ]
+
+[node name="HUDCanvas" type="CanvasLayer"]
+
+[node name="HUD" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1024, 600 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HP&ARMOR" type="TextureRect" parent="HUD"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -88.0
+margin_right = 266.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HpLight" type="Light2D" parent="HUD/HP&ARMOR"]
+position = Vector2( 133, 44 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 28 )
+range_layer_min = 1
+range_layer_max = 1
+
+[node name="ArmorLight" type="Light2D" parent="HUD/HP&ARMOR"]
+position = Vector2( 133, 44 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 29 )
+range_layer_min = 1
+range_layer_max = 1
+
+[node name="Hp" type="Label" parent="HUD/HP&ARMOR"]
+modulate = Color( 0.06, 0.42, 0.6, 1 )
+material = ExtResource( 8 )
+margin_left = 8.0
+margin_right = 31.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 23, 0 )
+rect_scale = Vector2( 6, 6 )
+custom_fonts/font = ExtResource( 6 )
+text = "100"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Armor" type="Label" parent="HUD/HP&ARMOR"]
+modulate = Color( 0, 0.3, 0.03, 1 )
+margin_left = 158.0
+margin_top = 28.0
+margin_right = 183.0
+margin_bottom = 43.0
+rect_min_size = Vector2( 25, 0 )
+rect_scale = Vector2( 4, 4 )
+custom_fonts/font = ExtResource( 6 )
+text = "100"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AMMO" type="TextureRect" parent="HUD"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -266.0
+margin_top = -88.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoLight" type="Light2D" parent="HUD/AMMO"]
+position = Vector2( 133, 44 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 26 )
+color = Color( 0.615686, 1, 0, 1 )
+energy = 2.0
+range_layer_min = 1
+range_layer_max = 1
+
+[node name="AmmoPicLight" type="Light2D" parent="HUD/AMMO"]
+position = Vector2( 133, 44 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 30 )
+range_layer_min = 1
+range_layer_max = 1
+
+[node name="Ammo" type="Label" parent="HUD/AMMO"]
+modulate = Color( 0.4, 0.286275, 0.121569, 1 )
+material = ExtResource( 8 )
+margin_left = 5.0
+margin_right = 34.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 29, 0 )
+rect_scale = Vector2( 6, 6 )
+custom_fonts/font = ExtResource( 6 )
+text = "100"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmmoPic" type="TextureRect" parent="HUD/AMMO"]
+material = ExtResource( 8 )
+margin_left = 178.0
+margin_right = 266.0
+margin_bottom = 88.0
+rect_min_size = Vector2( 88, 88 )
+texture = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TIMER" type="TextureRect" parent="HUD"]
+margin_right = 266.0
+margin_bottom = 68.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimerLight" type="Light2D" parent="HUD/TIMER"]
+position = Vector2( 133, 34 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 32 )
+range_layer_min = 1
+range_layer_max = 1
+
+[node name="Timer" type="Label" parent="HUD/TIMER"]
+modulate = Color( 0.388235, 0.192157, 0.380392, 1 )
+material = ExtResource( 8 )
+margin_right = 58.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 59, 0 )
+rect_scale = Vector2( 4.5, 4.5 )
+custom_fonts/font = ExtResource( 6 )
+text = "01:03:45"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LEVELINFO" type="TextureRect" parent="HUD"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -276.0
+margin_bottom = 104.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KillsLight" type="Light2D" parent="HUD/LEVELINFO"]
+position = Vector2( 138, 52 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 31 )
+range_layer_min = 1
+range_layer_max = 1
+
+[node name="SecretsLight" type="Light2D" parent="HUD/LEVELINFO"]
+position = Vector2( 138, 52 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 27 )
+range_layer_min = 1
+range_layer_max = 1
+
+[node name="KillLabel" type="Label" parent="HUD/LEVELINFO"]
+modulate = Color( 0.701961, 0, 0, 1 )
+material = ExtResource( 8 )
+margin_left = 28.0
+margin_right = 40.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 12, 0 )
+rect_scale = Vector2( 4, 4 )
+custom_fonts/font = ExtResource( 6 )
+text = "K:"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Kills" type="Label" parent="HUD/LEVELINFO"]
+modulate = Color( 0.701961, 0, 0, 1 )
+material = ExtResource( 8 )
+margin_left = 76.0
+margin_top = 8.0
+margin_right = 138.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 12, 0 )
+rect_scale = Vector2( 3, 3 )
+custom_fonts/font = ExtResource( 6 )
+text = "300/600"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SecretLabel" type="Label" parent="HUD/LEVELINFO"]
+modulate = Color( 0.227451, 0.211765, 0.701961, 1 )
+material = ExtResource( 8 )
+margin_left = 28.0
+margin_top = 45.0
+margin_right = 40.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 12, 0 )
+rect_scale = Vector2( 4, 4 )
+custom_fonts/font = ExtResource( 6 )
+text = "S:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Secrets" type="Label" parent="HUD/LEVELINFO"]
+modulate = Color( 0.227451, 0.211765, 0.701961, 1 )
+material = ExtResource( 8 )
+margin_left = 76.0
+margin_top = 52.0
+margin_right = 138.0
+margin_bottom = 67.0
+rect_min_size = Vector2( 12, 0 )
+rect_scale = Vector2( 3, 3 )
+custom_fonts/font = ExtResource( 6 )
+text = "2/7"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WEAPONWH" type="TextureRect" parent="HUD"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -184.0
+margin_top = -184.0
+margin_right = 184.0
+margin_bottom = 184.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light1" type="Light2D" parent="HUD/WEAPONWH"]
+visible = false
+position = Vector2( 184, 184 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 7 )
+range_layer_min = 1
+range_layer_max = 1
+
+[node name="1" type="Label" parent="HUD/WEAPONWH"]
+modulate = Color( 0.0352941, 0.494118, 0, 1 )
+material = ExtResource( 8 )
+margin_left = 200.0
+margin_top = 8.0
+margin_right = 205.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 5, 15 )
+rect_scale = Vector2( 3, 3 )
+custom_fonts/font = ExtResource( 6 )
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ammo1" type="Label" parent="HUD/WEAPONWH"]
+modulate = Color( 0.0352941, 0.494118, 0, 1 )
+material = ExtResource( 8 )
+margin_left = 192.0
+margin_top = 80.0
+margin_right = 224.0
+margin_bottom = 95.0
+rect_min_size = Vector2( 5, 15 )
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 6 )
+text = "000"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pic1" type="TextureRect" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_right = 368.0
+margin_bottom = 368.0
+texture = ExtResource( 23 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light2" type="Light2D" parent="HUD/WEAPONWH"]
+visible = false
+position = Vector2( 184, 184 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 16 )
+range_layer_min = 1
+range_layer_max = 1
+
+[node name="2" type="Label" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_left = 300.0
+margin_top = 78.0
+margin_right = 308.0
+margin_bottom = 93.0
+rect_min_size = Vector2( 5, 15 )
+rect_scale = Vector2( 3, 3 )
+custom_fonts/font = ExtResource( 6 )
+text = "2"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ammo2" type="Label" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_left = 226.0
+margin_top = 146.0
+margin_right = 258.0
+margin_bottom = 161.0
+rect_min_size = Vector2( 5, 15 )
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 6 )
+text = "000"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pic2" type="TextureRect" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_right = 368.0
+margin_bottom = 368.0
+texture = ExtResource( 25 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light3" type="Light2D" parent="HUD/WEAPONWH"]
+visible = false
+position = Vector2( 184, 184 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 14 )
+range_layer_min = 1
+range_layer_max = 1
+
+[node name="3" type="Label" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_left = 300.0
+margin_top = 245.0
+margin_right = 308.0
+margin_bottom = 260.0
+rect_min_size = Vector2( 5, 15 )
+rect_scale = Vector2( 3, 3 )
+custom_fonts/font = ExtResource( 6 )
+text = "3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ammo3" type="Label" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_left = 226.0
+margin_top = 192.0
+margin_right = 258.0
+margin_bottom = 207.0
+rect_min_size = Vector2( 5, 15 )
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 6 )
+text = "000"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pic3" type="TextureRect" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_right = 368.0
+margin_bottom = 368.0
+texture = ExtResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light4" type="Light2D" parent="HUD/WEAPONWH"]
+visible = false
+position = Vector2( 184, 184 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 15 )
+range_layer_min = 1
+range_layer_max = 1
+
+[node name="4" type="Label" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_left = 200.0
+margin_top = 316.0
+margin_right = 208.0
+margin_bottom = 331.0
+rect_min_size = Vector2( 5, 15 )
+rect_scale = Vector2( 3, 3 )
+custom_fonts/font = ExtResource( 6 )
+text = "4"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ammo4" type="Label" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_left = 192.0
+margin_top = 258.0
+margin_right = 224.0
+margin_bottom = 273.0
+rect_min_size = Vector2( 5, 15 )
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 6 )
+text = "000"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pic4" type="TextureRect" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_right = 368.0
+margin_bottom = 368.0
+texture = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light5" type="Light2D" parent="HUD/WEAPONWH"]
+visible = false
+position = Vector2( 184, 184 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 13 )
+range_layer_min = 1
+range_layer_max = 1
+
+[node name="5" type="Label" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_left = 146.0
+margin_top = 316.0
+margin_right = 154.0
+margin_bottom = 331.0
+rect_min_size = Vector2( 5, 15 )
+rect_scale = Vector2( 3, 3 )
+custom_fonts/font = ExtResource( 6 )
+text = "5"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ammo5" type="Label" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_left = 114.0
+margin_top = 258.0
+margin_right = 146.0
+margin_bottom = 273.0
+rect_min_size = Vector2( 5, 15 )
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 6 )
+text = "000"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pic5" type="TextureRect" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_right = 368.0
+margin_bottom = 368.0
+texture = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light6" type="Light2D" parent="HUD/WEAPONWH"]
+visible = false
+position = Vector2( 184, 184 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+range_layer_min = 1
+range_layer_max = 1
+
+[node name="6" type="Label" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_left = 45.0
+margin_top = 245.0
+margin_right = 53.0
+margin_bottom = 260.0
+rect_min_size = Vector2( 5, 15 )
+rect_scale = Vector2( 3, 3 )
+custom_fonts/font = ExtResource( 6 )
+text = "6"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ammo6" type="Label" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_left = 80.0
+margin_top = 192.0
+margin_right = 112.0
+margin_bottom = 207.0
+rect_min_size = Vector2( 5, 15 )
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 6 )
+text = "000"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pic6" type="TextureRect" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_right = 368.0
+margin_bottom = 368.0
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light7" type="Light2D" parent="HUD/WEAPONWH"]
+visible = false
+position = Vector2( 184, 184 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 12 )
+range_layer_min = 1
+range_layer_max = 1
+
+[node name="7" type="Label" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_left = 45.0
+margin_top = 78.0
+margin_right = 53.0
+margin_bottom = 93.0
+rect_min_size = Vector2( 5, 15 )
+rect_scale = Vector2( 3, 3 )
+custom_fonts/font = ExtResource( 6 )
+text = "7"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ammo7" type="Label" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_left = 80.0
+margin_top = 146.0
+margin_right = 112.0
+margin_bottom = 161.0
+rect_min_size = Vector2( 5, 15 )
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 6 )
+text = "000"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pic7" type="TextureRect" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_right = 368.0
+margin_bottom = 368.0
+texture = ExtResource( 20 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Light8" type="Light2D" parent="HUD/WEAPONWH"]
+visible = false
+position = Vector2( 184, 184 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 11 )
+range_layer_min = 1
+range_layer_max = 1
+
+[node name="8" type="Label" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_left = 150.0
+margin_top = 8.0
+margin_right = 158.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 5, 15 )
+rect_scale = Vector2( 3, 3 )
+custom_fonts/font = ExtResource( 6 )
+text = "8"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ammo8" type="Label" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_left = 114.0
+margin_top = 80.0
+margin_right = 146.0
+margin_bottom = 95.0
+rect_min_size = Vector2( 5, 15 )
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 6 )
+text = "000"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pic8" type="TextureRect" parent="HUD/WEAPONWH"]
+material = ExtResource( 8 )
+margin_right = 368.0
+margin_bottom = 368.0
+texture = ExtResource( 21 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="9" type="Label" parent="HUD/WEAPONWH"]
+visible = false
+material = ExtResource( 8 )
+margin_left = 302.0
+margin_top = 1.0
+margin_right = 310.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 5, 15 )
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 6 )
+text = "9"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pic9" type="TextureRect" parent="HUD/WEAPONWH"]
+visible = false
+material = ExtResource( 8 )
+margin_right = 368.0
+margin_bottom = 368.0
+texture = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WeaponLine" type="Line2D" parent="HUD/WEAPONWH"]
+visible = false
+position = Vector2( 184, 184 )
+points = PoolVector2Array( 0, 0, 100, 0 )
+width = 5.0
+width_curve = SubResource( 1 )
+default_color = Color( 0.368627, 0.101961, 0.501961, 1 )

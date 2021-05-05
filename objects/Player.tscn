@@ -1,145 +1,48 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://addons/smoothing/smoothing_2d.gd" type="Script" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
-[ext_resource path="res://sprites/Player/PlayManBrake.png" type="Texture" id=3]
-[ext_resource path="res://sprites/Player/PlayManIdle.png" type="Texture" id=4]
-[ext_resource path="res://sprites/Player/PlayManJump.png" type="Texture" id=5]
-[ext_resource path="res://sprites/Player/PlayManFastRun.png" type="Texture" id=6]
-[ext_resource path="res://sprites/Player/PlayManRun.png" type="Texture" id=7]
+[ext_resource path="res://objects/PlayerRightLegAnimation.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://objects/PlayerBodyAnimation.tres" type="SpriteFrames" id=4]
+[ext_resource path="res://objects/PlayerLeftLegAnimation.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://objects/PlayerLeftArmAnimation.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://objects/PlayerRightArmAnimation.tres" type="SpriteFrames" id=7]
 [ext_resource path="res://sprites/Lights/RadialLight.png" type="Texture" id=8]
-[ext_resource path="res://sprites/Player/PlayManFall.png" type="Texture" id=9]
+[ext_resource path="res://objects/PlayerAnimation.tres" type="SpriteFrames" id=9]
 [ext_resource path="res://sounds/Footstep.wav" type="AudioStream" id=10]
 [ext_resource path="res://sounds/FallOnGround.wav" type="AudioStream" id=11]
+[ext_resource path="res://music/Raid.ogg" type="AudioStream" id=12]
+[ext_resource path="res://objects/HUDCanvas.tscn" type="PackedScene" id=13]
+[ext_resource path="res://objects/PlayerWeaponsAnimation.tres" type="SpriteFrames" id=14]
+[ext_resource path="res://sprites/HUD/CrosshairLine.png" type="Texture" id=15]
+[ext_resource path="res://sprites/HUD/Crosshair.png" type="Texture" id=16]
+[ext_resource path="res://UnshadedCanvasMaterial.tres" type="Material" id=17]
+[ext_resource path="res://sprites/Lights/FlashLight.png" type="Texture" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 14 )
 
-[sub_resource type="CanvasItemMaterial" id=2]
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.502359 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CanvasItemMaterial" id=3]
 light_mode = 1
 
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 32, 48 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 9 )
-region = Rect2( 0, 0, 32, 48 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 48, 32 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 6 )
-region = Rect2( 48, 0, 48, 32 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 6 )
-region = Rect2( 96, 0, 48, 32 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 6 )
-region = Rect2( 144, 0, 48, 32 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 4 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 4 )
-region = Rect2( 64, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 4 )
-region = Rect2( 96, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 4 )
-region = Rect2( 128, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 4 )
-region = Rect2( 160, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 4 )
-region = Rect2( 192, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 7 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 7 )
-region = Rect2( 64, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 7 )
-region = Rect2( 96, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 7 )
-region = Rect2( 128, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 7 )
-region = Rect2( 160, 0, 32, 32 )
-
-[sub_resource type="SpriteFrames" id=23]
-animations = [ {
-"frames": [ SubResource( 3 ) ],
-"loop": true,
-"name": "Jump",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 4 ) ],
-"loop": true,
-"name": "Brake",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 5 ) ],
-"loop": true,
-"name": "Fall",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
-"loop": true,
-"name": "Fast Run",
-"speed": 15.0
-}, {
-"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ) ],
-"loop": true,
-"name": "Run",
-"speed": 10.0
-} ]
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0, 0.709091, 1 )
+colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.313726 )
 
 [node name="Player" type="Node2D"]
 
 [node name="PhysBody" type="KinematicBody2D" parent="."]
+collision_mask = 6
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PhysBody"]
 position = Vector2( 0, 4 )
 scale = Vector2( 2, 2 )
 shape = SubResource( 1 )
+one_way_collision_margin = 0.0
 
 [node name="JumpTimer" type="Timer" parent="PhysBody"]
 wait_time = 0.6
@@ -153,6 +56,15 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
+[node name="DashDirTimer" type="Timer" parent="PhysBody"]
+process_mode = 0
+wait_time = 3.0
+one_shot = true
+
+[node name="DashTimer" type="Timer" parent="PhysBody"]
+wait_time = 0.03
+one_shot = true
+
 [node name="Footstep" type="AudioStreamPlayer2D" parent="PhysBody"]
 stream = ExtResource( 11 )
 pitch_scale = 0.9
@@ -161,27 +73,134 @@ attenuation = 9.0
 [node name="FallOnGround" type="AudioStreamPlayer2D" parent="PhysBody"]
 stream = ExtResource( 10 )
 
+[node name="GroundChecker" type="RayCast2D" parent="PhysBody"]
+enabled = true
+cast_to = Vector2( 0, 30 )
+
+[node name="Music" type="AudioStreamPlayer" parent="PhysBody"]
+stream = ExtResource( 12 )
+volume_db = -30.0
+
+[node name="WeaponWheelTimer" type="Timer" parent="PhysBody"]
+process_mode = 0
+wait_time = 3.0
+one_shot = true
+
 [node name="Smoothing2D" type="Node2D" parent="."]
 script = ExtResource( 1 )
 target = NodePath("../PhysBody")
+
+[node name="Light2D" type="Light2D" parent="Smoothing2D"]
+texture = ExtResource( 8 )
+energy = 0.5
+shadow_enabled = true
+shadow_color = Color( 1, 1, 1, 0 )
+shadow_buffer_size = 512
+
+[node name="DashLine" type="Line2D" parent="Smoothing2D"]
+visible = false
+material = ExtResource( 17 )
+points = PoolVector2Array( 0, 0, 100, 0 )
+width = 5.0
+width_curve = SubResource( 2 )
+default_color = Color( 1, 0.286275, 0.286275, 1 )
+
+[node name="Full" type="AnimatedSprite" parent="Smoothing2D"]
+visible = false
+material = SubResource( 3 )
+scale = Vector2( 2, 2 )
+frames = ExtResource( 9 )
+animation = "Idle"
+frame = 2
+playing = true
+
+[node name="LeftLeg" type="AnimatedSprite" parent="Smoothing2D"]
+material = SubResource( 3 )
+scale = Vector2( 2, 2 )
+frames = ExtResource( 5 )
+animation = "Idle"
+playing = true
+
+[node name="LeftArm" type="AnimatedSprite" parent="Smoothing2D"]
+visible = false
+material = SubResource( 3 )
+scale = Vector2( 2, 2 )
+frames = ExtResource( 6 )
+animation = "Idle"
+frame = 4
+playing = true
+
+[node name="Body" type="AnimatedSprite" parent="Smoothing2D"]
+material = SubResource( 3 )
+scale = Vector2( 2, 2 )
+frames = ExtResource( 4 )
+animation = "Idle"
+frame = 2
+playing = true
+
+[node name="RightArm" type="AnimatedSprite" parent="Smoothing2D"]
+visible = false
+material = SubResource( 3 )
+scale = Vector2( 2, 2 )
+frames = ExtResource( 7 )
+animation = "Idle"
+frame = 6
+playing = true
+
+[node name="RightLeg" type="AnimatedSprite" parent="Smoothing2D"]
+material = SubResource( 3 )
+scale = Vector2( 2, 2 )
+frames = ExtResource( 3 )
+animation = "Idle"
+frame = 4
+playing = true
+
+[node name="WeaponArm" type="AnimatedSprite" parent="Smoothing2D"]
+material = SubResource( 3 )
+scale = Vector2( 2, 2 )
+frames = ExtResource( 14 )
+animation = "2"
+playing = true
+offset = Vector2( 8, 0 )
+
+[node name="CrosshairLinePivot" type="Position2D" parent="Smoothing2D"]
+
+[node name="CrosshairLine" type="Line2D" parent="Smoothing2D/CrosshairLinePivot"]
+material = ExtResource( 17 )
+position = Vector2( 60, 0 )
+points = PoolVector2Array( 0, 0, 200, 0 )
+width = 5.0
+default_color = Color( 1, 1, 1, 1 )
+gradient = SubResource( 4 )
+texture = ExtResource( 15 )
+texture_mode = 1
+end_cap_mode = 2
+
+[node name="Crosshair" type="Sprite" parent="Smoothing2D/CrosshairLinePivot"]
+material = ExtResource( 17 )
+position = Vector2( 280, 0 )
+rotation = 1.5708
+texture = ExtResource( 16 )
+
+[node name="FlashLight" type="Light2D" parent="Smoothing2D/CrosshairLinePivot"]
+texture = ExtResource( 18 )
+offset = Vector2( 320, 0 )
+texture_scale = 2.0
+energy = 0.8
+shadow_enabled = true
+shadow_color = Color( 1, 1, 1, 0 )
+shadow_buffer_size = 512
 
 [node name="Camera2D" type="Camera2D" parent="Smoothing2D"]
 current = true
 limit_smoothed = true
 smoothing_enabled = true
-smoothing_speed = 20.0
+smoothing_speed = 10.0
+drag_margin_left = 0.7
+drag_margin_top = 0.7
+drag_margin_right = 0.7
+drag_margin_bottom = 0.7
 
-[node name="Light2D" type="Light2D" parent="Smoothing2D"]
-texture = ExtResource( 8 )
-texture_scale = 2.0
-energy = 0.8
-shadow_enabled = true
-shadow_buffer_size = 512
+[node name="HUDCanvas" parent="Smoothing2D/Camera2D" instance=ExtResource( 13 )]
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Smoothing2D"]
-material = SubResource( 2 )
-scale = Vector2( 2, 2 )
-frames = SubResource( 23 )
-animation = "Idle"
-frame = 3
-playing = true
+[connection signal="timeout" from="PhysBody/DashTimer" to="PhysBody" method="_on_DashTimer_timeout"]
