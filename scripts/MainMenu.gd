@@ -1,9 +1,9 @@
 extends Control
 
-onready var TestMap0B : Button = get_node("AspectRatioContainer/MarginContainer/VBoxContainer/TestMap0B")
-onready var TestMap1B : Button = get_node("AspectRatioContainer/MarginContainer/VBoxContainer/TestMap1B")
-onready var TestMap2B : Button = get_node("AspectRatioContainer/MarginContainer/VBoxContainer/TestMap2B")
-onready var ExitGameB : Button = get_node("AspectRatioContainer/MarginContainer/VBoxContainer/ExitGameB")
+onready var TestMap0B : Button = get_node("VBoxContainer/TestMap0B")
+onready var TestMap1B : Button = get_node("VBoxContainer/TestMap1B")
+onready var TestMap2B : Button = get_node("VBoxContainer/TestMap2B")
+onready var ExitGameB : Button = get_node("VBoxContainer/ExitGameB")
 
 func _ready():
 	TestMap0B.grab_focus()

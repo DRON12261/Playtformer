@@ -124,7 +124,7 @@ var MaxHealth : int = 200
 var Armor : int = 20
 var MaxArmor : int = 200
 var isAlive : bool = true
-var cameraSmoothSpeed : float = 5
+var cameraSmoothSpeed : float = 4
 var weaponsAnimIdleOffsetX : float = 0
 
 var lookDeadzone : float = 0.7
@@ -238,6 +238,7 @@ func _physics_process(delta):
 		jump_timer.stop()
 		DASHING -= 1
 		VELOCITY = Vector2(5000, 0).rotated(dashLine.rotation)
+		#MainCamera.global_position += VELOCITY
 		#print(VELOCITY, "    ", dashLine.rotation_degrees)
 		IS_DASHING = false
 		dashTimer.start()
@@ -373,6 +374,9 @@ func _physics_process(delta):
 		#print(angleNormal, "   ", VelocityM, "   -   ", VELOCITY.x, "        ", Vector2.UP.rotated(deg2rad(angleNormal)))
 
 func _process(delta):
+	#if Input.is_action_pressed("dash") and !dashDirTimer.is_stopped():
+		#Engine.time_scale = (dashDirTimer.wait_time / dashDirTimer.time_left) / dashDirTimer.wait_time
+	
 	#MainCamera.smoothing_speed = cameraSmoothSpeed * (Engine.time_scale + (1 - Engine.time_scale)/2)
 	MainCamera.smoothing_speed = cameraSmoothSpeed * Engine.time_scale
 	if LevelMus != null:
@@ -508,15 +512,15 @@ func _process(delta):
 	bodyAnim.rotation_degrees = lookAngle*0.6 if !lookflip else (lookAngle + 180)*0.6 if lookAngle < 0 else (lookAngle - 180)*0.6
 	if isAiming:
 		var camOffset = Vector2(0.6,0).rotated(deg2rad(lookAngle))
-		MainCamera.offset_h = camOffset.x
-		MainCamera.offset_v = camOffset.y
+		MainCamera.offset_h = camOffset.x# + (VELOCITY.x / MAX_VELOCITY.x if VELOCITY.x / MAX_VELOCITY.x <= 1 else 1)
+		MainCamera.offset_v = camOffset.y*1.4
 		weaponsAnim.offset.y = 0
 		weaponsAnimIdleOffsetX = 0
 	else:
 		weaponsAnim.offset.y = 3
 		weaponsAnimIdleOffsetX = -2
 		weaponsAnim.rotation_degrees = 25 if !lookflip else -25
-		MainCamera.offset_h = VELOCITY.x / MAX_VELOCITY.x
+		MainCamera.offset_h = 0#(VELOCITY.x / MAX_VELOCITY.x if VELOCITY.x / MAX_VELOCITY.x <= 1 else 1)
 		MainCamera.offset_v = 0
 	
 	animation.speed_scale = anim_speed
